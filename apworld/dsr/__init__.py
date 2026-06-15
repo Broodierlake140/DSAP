@@ -1,6 +1,7 @@
 # world/dsr/__init__.py
 from typing import Dict, Set, List, ClassVar, TextIO, Any, Optional
 
+import entrance_rando
 from BaseClasses import MultiWorld, Region, Item, Entrance, Tutorial, ItemClassification, Location
 from Options import Toggle, OptionError, Option
 
@@ -291,21 +292,28 @@ class DSRWorld(World):
             "Chasm of the Abyss",
             "Chasm of the Abyss - Manus", 
             ]
+        fog_gates_exact = ["Upper Undead Burg - Fog", "Undead Parish - Fog", "Lower Blighttown - Fog"]
+        fog_gates_post = ["Darkroot Garden", "Ash Lake", "Sen's Fortress - After First Fog", "Sen's Fortress - After Second Fog", "Anor Londo - After First Fog", "Anor Londo - After Second Fog", "Painted World of Ariamis - After Fog", "Upper New Londo Ruins - After Fog", "The Duke's Archives - Courtyard", "Tomb of the Giants - After White Fog"]
+        boss_gates = ["Upper Undead Burg - Taurus Demon", "Undead Parish - Bell Gargoyles", "Lower Undead Burg - Capra Demon", "Depths - Gaping Dragon", "Lower Blighttown - Quelaag", "Darkroot Garden - Moonlight Butterfly", "Sen's Fortress - Iron Golem", "Anor Londo - Ornstein and Smough", "Anor Londo - Gwyndolin", "Painted World of Ariamis - Crossbreed Priscilla", "The Abyss", "The Duke's Archives - After First Seath Encounter", "Demon Ruins - Ceaseless Discharge", "Demon Ruins - Demon Firesage", "Demon Ruins - Centipede Demon", "Lost Izalith - Bed of Chaos", "The Catacombs - Pinwheel", "Tomb of the Giants - Nito", "Kiln of the First Flame - Gwyn", "Sanctuary Garden - Sanctuary Guardian", "Royal Wood - Artorias", "Chasm of the Abyss - Manus"]
         regions.update({region_name: self.create_region(region_name, location_tables[region_name]) for region_name in our_regions})
        
         # print("DSR: created " + str(self.gc) + " real and "+ str(self.bc) + " fake locations")
 
         # Connect Regions
         def create_connection(from_region: str, to_region: str, rule: Rule=True_()):
-            self.create_entrance(regions[from_region], regions[to_region], rule)
-
+            ent = self.create_entrance(regions[from_region], regions[to_region], rule)
+            if from_region in fog_gates_exact:
+                entrance_rando.disconnect_entrance_for_randomization(ent, "0", f"{from_region} -> {to_region}")
+            elif to_region in fog_gates_post:
+                entrance_rando.disconnect_entrance_for_randomization(ent, "0", f"{from_region} -> {to_region}")
+            elif to_region in boss_gates:
+                entrance_rando.disconnect_entrance_for_randomization(ent, "0", f"{from_region} -> {to_region}")
         for region in region_rules_table.keys():
             for entrance in region_rules_table[region]:
                 create_connection(entrance.source, region, rule=entrance.rule)
 
         for skip in get_all_skips():
             self.create_entrance(regions[skip.starting_location], regions[skip.ending_location], rule=skip.get_rule(self), name=f"SKIP {skip.name}", force_creation=True)
-        
 
     # For each region, add the associated locations retrieved from the corresponding location_table
     def create_region(self, region_name, location_table) -> Region:
@@ -378,7 +386,6 @@ class DSRWorld(World):
         self.multiworld.regions.append(new_region)
         #print("adding region: " + region_name)
         return new_region
-
 
     def create_items(self):
         skip_itemlocs: List[DSRItem, Location] = []
@@ -554,10 +561,11 @@ class DSRWorld(World):
         # for debugging purposes, you may want to visualize the layout of your world. Uncomment the following code to
         # write a PlantUML diagram to the file "my_world.puml" that can help you see whether your regions and locations
         # are connected and placed as desired
-        # from Utils import visualize_regions
-        # visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
- 
-        
+        #from Utils import visualize_regions
+        #visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
+        #result = entrance_rando.randomize_entrances(self, True, "0" )
+        #self.randomized_entrances = dict(result.pairings)
+
     def fill_slot_data(self) -> Dict[str, object]:
         slot_data: Dict[str, object] = {}
         name_to_dsr_code = {item.name: item.dsr_code for item in item_dictionary.values()}
@@ -616,6 +624,7 @@ class DSRWorld(World):
                 "upgraded_weapons_min_level": self.options.upgraded_weapons_min_level.value,
                 "upgraded_weapons_max_level": self.options.upgraded_weapons_max_level.value,
             },
+            "ger": self.randomized_entrances,
             "seed": self.multiworld.seed_name,  # to verify the server's multiworld
             "slot": self.multiworld.player_name[self.player],  # to connect to server
             "base_id": self.base_id,  # to merge location and items lists
