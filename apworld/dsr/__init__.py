@@ -563,8 +563,8 @@ class DSRWorld(World):
         # are connected and placed as desired
         #from Utils import visualize_regions
         #visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
-        #result = entrance_rando.randomize_entrances(self, True, "0" )
-        #self.randomized_entrances = dict(result.pairings)
+        result = entrance_rando.randomize_entrances(self, True, "0" )
+        self.randomized_entrances = dict(result.pairings)
 
     def fill_slot_data(self) -> Dict[str, object]:
         slot_data: Dict[str, object] = {}
