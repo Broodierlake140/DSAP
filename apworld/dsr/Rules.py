@@ -42,22 +42,42 @@ location_rules_table = [
 # All region rules
 region_rules_table: dict[str, list[DsrEntranceRule]] = {
   "Undead Asylum Cell": [
-    DsrEntranceRule("Menu", True_())
+    DsrEntranceRule("Menu", True_()),
+    DsrEntranceRule("Undead Asylum Cell Door", CanReachRegion("Undead Asylum Cell Door") | Has("Dungeon Cell Key")),
   ],
   "Undead Asylum Cell Door": [
     DsrEntranceRule("Undead Asylum Cell", Has("Dungeon Cell Key")),
+    DsrEntranceRule("Northern Undead Asylum", True_()),
   ],
+  "Northern Undead Asylum - Fog Gate Front": [
+    DsrEntranceRule("Northern Undead Asylum", True_()),
+  ],
+  "Northern Undead Asylum - Fog Gate Back": [
+    DsrEntranceRule("Northern Undead Asylum - After Fog", True_()),
+  ],  
   "Northern Undead Asylum": [
     DsrEntranceRule("Undead Asylum Cell Door", True_()),
+    DsrEntranceRule("Northern Undead Asylum - Fog Gate Front", True_()),
+    DsrEntranceRule("Northern Undead Asylum - After Fog", True_()),
   ],
   "Northern Undead Asylum - After Fog": [
-    DsrEntranceRule("Northern Undead Asylum", True_()),
+    DsrEntranceRule("Northern Undead Asylum", CanReachRegion("Northern Undead Asylum - After Fog")),
+    DsrEntranceRule("Northern Undead Asylum - Fog Gate Back", True_()),
+    DsrEntranceRule("Northern Undead Asylum - F2 East Door", Has("Undead Asylum F2 East Key")),
+  ],
+  "Northern Undead Asylum - Asylum Demon Fog Gate Front": [
+    DsrEntranceRule("Northern Undead Asylum - After F2 East Door", True_()),
+  ],
+  "Northern Undead Asylum - Asylum Demon Fog Gate Back" : [
+    
   ],
   "Northern Undead Asylum - F2 East Door": [
     DsrEntranceRule("Northern Undead Asylum - After Fog", Has("Undead Asylum F2 East Key")),
+    DsrEntranceRule("Northern Undead Asylum - After F2 East Door", True_()),
   ],
   "Northern Undead Asylum - After F2 East Door": [
     DsrEntranceRule("Northern Undead Asylum - F2 East Door", True_()),
+    DsrEntranceRule("Northern Undead Asylum - Asylum Demon Fog Gate Front", True_()),
   ],
   "Northern Undead Asylum - Big Pilgrim Door": [
     DsrEntranceRule("Northern Undead Asylum - After F2 East Door", Has("Big Pilgrim's Key")),
