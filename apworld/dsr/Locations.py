@@ -77,6 +77,7 @@ class DSRLocation(Location):
             "Undead Parish - Fog", 
             "Undead Parish", 
             "Undead Parish - Bell Gargoyles",
+            "Undead Parish - After Bell Gargoyles",
             "Firelink Shrine - After Undead Parish Elevator",
             "Northern Undead Asylum Second Visit",
             "Northern Undead Asylum Second Visit - F2 West Door",
@@ -88,7 +89,10 @@ class DSRLocation(Location):
             "Lower Undead Burg - Capra Demon",
             "Lower Undead Burg - After Capra Demon",
             "Watchtower Basement",
-            "Depths", 
+            "Depths",
+            "Depths - Fog Gate Front",
+            "Depths - Fog",
+            "Depths - Fog Gate Rear",
             "Depths - After Sewer Chamber Key",
             "Depths - Gaping Dragon",
             "Depths - After Gaping Dragon",
@@ -118,11 +122,16 @@ class DSRLocation(Location):
             "Sen's Fortress - Iron Golem",
             "Sen's Fortress - After Iron Golem",
             "Anor Londo",
+            "Anor Londo - Bottom Of First Spiral Elevator",
             "Anor Londo - After First Fog",
             "Anor Londo - Painting Room",
+            "Anor Londo - Main Building Outside",
+            "Anor Londo - Balcony",
             "Anor Londo - After Second Fog",
             "Anor Londo - Ornstein and Smough",
             "Anor Londo - After Ornstein and Smough",
+            "Anor Londo - Smough Elevator",
+            "Anor Londo - Ornstein Elevator",
             "Anor Londo - Gwynevere",
             "Anor Londo - Gwyndolin",
             "Anor Londo - After Gwyndolin",
@@ -141,15 +150,18 @@ class DSRLocation(Location):
             "The Duke's Archives - After Archive Tower Cell Key",
             "The Duke's Archives - After Archive Prison Extra Key",
             "The Duke's Archives - Out of Cell",
-            "The Duke's Archives - After Archive Tower Giant Door Key", 
+            "The Duke's Archives - After Archive Tower Giant Door Key",
+            "The Duke's Archives - Small Pre Courtyard Room",
             "The Duke's Archives - Courtyard",
             "The Duke's Archives - Giant Cell", 
-            "Crystal Cave", 
+            "Crystal Cave",
+            "Crystal Cave - Seath",
             "Crystal Cave - After Seath", 
             "The Duke's Archives - First Arena after Seath's Death", 
             "Demon Ruins - Early",
             "Demon Ruins - Ceaseless Discharge",
-            "Demon Ruins", 
+            "Demon Ruins",
+            "Demon Ruins - Post Gold Fog",
             "Demon Ruins - Demon Firesage",
             "Demon Ruins - After Demon Firesage",
             "Demon Ruins - Centipede Demon",
@@ -164,6 +176,7 @@ class DSRLocation(Location):
             "Tomb of the Giants", 
             "Tomb of the Giants - After White Fog", 
             "Tomb of the Giants - Behind Golden Fog Wall",
+            "Tomb of the Giants - Gravelord Convenant",
             "Tomb of the Giants - Nito",
             "Tomb of the Giants - After Nito",
             "Firelink Altar",
@@ -478,6 +491,8 @@ location_tables = {
     DSRLocationData(11110803, f"UP: Boss Fog Wall - Bell Gargoyles", f"Boss Fog Wall Key - Bell Gargoyles", DSRLocationCategory.BOSS_FOG_WALL),
     DSRLocationData(11110073, f"UP: Bell Gargoyles Defeated", f"Bell Gargoyles Defeated", DSRLocationCategory.BOSS),
     DSRLocationData(11110970, f"UP: Twin Humanities - Bell Gargoyles Drop", f"Twin Humanities",  DSRLocationCategory.BOSS_DROP),
+],
+"Undead Parish - After Bell Gargoyles": [
     DSRLocationData(11110074, f"UP: Bell of Awakening #1 rung", f"Bell of Awakening #1", DSRLocationCategory.EVENT),
 ],
 "Undead Parish - Oswald of Carim": [
@@ -595,6 +610,11 @@ location_tables = {
     DSRLocationData(11110126, f"DE: Depths Shortcut opened", f"Door Filler", DSRLocationCategory.DOOR),
     DSRLocationData(11110786, f"DE: Fog Wall - Depths Rat Room", f"Fog Wall Key - Depths Rat Room", DSRLocationCategory.FOG_WALL),
 ],
+"Depths - Fog Gate Front": [],
+"Depths - Fog": [
+    DSRLocationData(11110786, f"DE: Fog Wall - Depths Rat Room", f"Fog Wall Key - Depths Rat Room", DSRLocationCategory.FOG_WALL),
+],
+"Depths - Fog Gate Rear": [],
 "Depths - Gaping Dragon": [
     DSRLocationData(11110801, f"DE: Boss Fog Wall - Gaping Dragon", f"Boss Fog Wall Key - Gaping Dragon", DSRLocationCategory.BOSS_FOG_WALL),
     DSRLocationData(11110127, f"DE: Gaping Dragon Defeated", f"Gaping Dragon Defeated", DSRLocationCategory.BOSS),
@@ -681,10 +701,10 @@ location_tables = {
 "Lower Blighttown - Quelaag": [
     DSRLocationData(11110802, f"BT: Boss Fog Wall - Quelaag", f"Boss Fog Wall Key - Quelaag", DSRLocationCategory.BOSS_FOG_WALL),
     DSRLocationData(11110164, f"BT: Chaos Witch Quelaag Defeated", f"Chaos Witch Quelaag Defeated", DSRLocationCategory.BOSS),
-],
-"Lower Blighttown - After Quelaag": [
     DSRLocationData(11110560, f"BT: Soul of Quelaag", f"Soul of Quelaag", DSRLocationCategory.BOSS_SOUL),
     DSRLocationData(11110980, f"BT: Twin Humanities - Quelaag Drop", f"Twin Humanities",  DSRLocationCategory.BOSS_HUMANITY),
+],
+"Lower Blighttown - After Quelaag": [
     DSRLocationData(11110835, f"BT: Daughter of Chaos Bonfire", f"Bonfire Warp Unlock - Daughter of Chaos", DSRLocationCategory.BONFIRE),
     DSRLocationData(11110556, f"BT: Bell of Awakening #2 rung", f"Bell of Awakening #2", DSRLocationCategory.EVENT),
 ],
@@ -781,10 +801,10 @@ location_tables = {
 "Darkroot Garden - Moonlight Butterfly": [
     DSRLocationData(11110819, f"DG: Boss Fog Wall - Moonlight Butterfly", f"Boss Fog Wall Key - Moonlight Butterfly", DSRLocationCategory.BOSS_FOG_WALL),
     DSRLocationData(11110200, f"DG: Moonlight Butterfly Defeated", f"Moonlight Butterfly Defeated", DSRLocationCategory.BOSS),
-    DSRLocationData(11110975, f"DG: Humanity - Moonlight Butterfly Drop", f"Humanity",  DSRLocationCategory.BOSS_HUMANITY)
+    DSRLocationData(11110975, f"DG: Humanity - Moonlight Butterfly Drop", f"Humanity",  DSRLocationCategory.BOSS_HUMANITY),
+    DSRLocationData(11110557, f"DG: Soul of the Moonlight Butterfly", f"Soul of the Moonlight Butterfly", DSRLocationCategory.BOSS_SOUL),
 ],
 "Darkroot Garden - After Moonlight Butterfly": [
-    DSRLocationData(11110557, f"DG: Soul of the Moonlight Butterfly", f"Soul of the Moonlight Butterfly", DSRLocationCategory.BOSS_SOUL),
     DSRLocationData(11110201, f"DG: Homeward Bone - Frozen Blacksmith", f"Homeward Bone", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110202, f"DG: Watchtower Basement Key", f"Watchtower Basement Key", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110203, f"DG: Divine Ember", f"Divine Ember", DSRLocationCategory.ITEM_LOT),
@@ -919,15 +939,16 @@ location_tables = {
     DSRLocationData(11110837, f"AL: Anor Londo Bonfire", f"Bonfire Warp Unlock - Anor Londo", DSRLocationCategory.BONFIRE),
     DSRLocationData(11110262, f"AL: Demon Titanite - Anor Londo Giants", f"Demon Titanite", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110263, f"AL: Crystal Halberd - Mimic Drop, Toward Archives", f"Crystal Halberd", DSRLocationCategory.MIMIC_DROP),
+],
+"Anor Londo - Bottom Of First Spiral Elevator": [
     DSRLocationData(11110264, f"AL: Twinkling Titanite - Anor Londo", f"Twinkling Titanite", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110265, f"AL: Demon Titanite - Anor Londo Elevator", f"Demon Titanite", DSRLocationCategory.ITEM_LOT),
-    DSRLocationData(11110266, f"AL: Divine Blessing - Anor Londo Rafters", f"Divine Blessing", DSRLocationCategory.ITEM_LOT),
+    DSRLocationData(11110266, f"AL: Divine Blessing - Anor Londo Rafters", f"Divine Blessing", DSRLocationCategory.ITEM_LOT),  
 ],
 "Anor Londo - After First Fog": [
     DSRLocationData(11110791, f"AL: Fog Wall - Anor Londo #1 (Rafters)", f"Fog Wall Key - Anor Londo #1 (Rafters)", DSRLocationCategory.FOG_WALL),
     DSRLocationData(11110838, f"AL: Darkmoon Tomb Bonfire", f"Bonfire Warp Unlock - Darkmoon Tomb", DSRLocationCategory.BONFIRE),
     DSRLocationData(11110268, f"AL: Ring of the Sun's Firstborn", f"Ring of the Sun's Firstborn", DSRLocationCategory.ITEM_LOT),
-    DSRLocationData(11110274, f"AL: Soul of a Hero - Left Silver Archer", f"Soul of a Hero", DSRLocationCategory.ITEM_LOT),
 ],
 "Anor Londo - Painting Room": [
     DSRLocationData(11110270, f"AL: Black Iron Helm", f"Black Iron Helm", DSRLocationCategory.ITEM_LOT),
@@ -938,6 +959,10 @@ location_tables = {
     DSRLocationData(11110272, f"AL: Black Iron Greatshield", f"Black Iron Greatshield", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110269, f"AL: Sorcery: Great Magic Weapon", f"Sorcery: Great Magic Weapon", DSRLocationCategory.ITEM_LOT),
 ],
+"Anor Londo - Main Building Outside": [
+    DSRLocationData(11110274, f"AL: Soul of a Hero - Left Silver Archer", f"Soul of a Hero", DSRLocationCategory.ITEM_LOT),
+],
+"Anor Londo - Balcony": [],
 "Anor Londo - After Second Fog": [
     DSRLocationData(11110792, f"AL: Fog Wall - Anor Londo #2 (Archers)", f"Fog Wall Key - Anor Londo #2 (Archers)", DSRLocationCategory.FOG_WALL),
     DSRLocationData(11110273, f"AL: Anor Londo - Residence Bonfire", f"Bonfire Warp Unlock - Anor Londo - Residence", DSRLocationCategory.BONFIRE),
@@ -983,6 +1008,8 @@ location_tables = {
     DSRLocationData(11110991, f"AL: Humanity - O+S Drop", f"Humanity",  DSRLocationCategory.BOSS_HUMANITY),
     DSRLocationData(11111003, f"AL: Leo Ring - O+S Drop", f"Leo Ring",  DSRLocationCategory.BOSS_DROP),
 ],
+"Anor Londo - Smough Elevator": [],
+"Anor Londo - Ornstein Elevator": [],
 "Anor Londo - Gwynevere": [    
     DSRLocationData(11110294, f"AL: Lordvessel", f"Lordvessel", DSRLocationCategory.ITEM_LOT),                           
 ],
@@ -1164,6 +1191,7 @@ location_tables = {
     DSRLocationData(11110684, f"DA: Waistcloth of the Channelers", f"Waistcloth of the Channelers", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110389, f"DA: Prism Stone - Duke's Archives", f"Prism Stone x20", DSRLocationCategory.ITEM_LOT),
 ],
+"The Duke's Archives - Small Pre Courtyard Room": [],
 "The Duke's Archives - Courtyard" :[
     DSRLocationData(11110793, f"DA: Fog Wall - Duke's Archives Courtyard Entrance", f"Fog Wall Key - Duke's Archives Courtyard Entrance", DSRLocationCategory.FOG_WALL),
     DSRLocationData(11110390, f"DA: Crystalline Helm", f"Crystalline Helm", DSRLocationCategory.ITEM_LOT),
@@ -1186,6 +1214,8 @@ location_tables = {
     DSRLocationData(11111020, f"CC: Extra Titanite - Crystal Lizard Drop, 3rd Under Gold Golem", f"Extra Blue Titanite", DSRLocationCategory.CRYSTAL_LIZARD),
     DSRLocationData(11110398, f"CC: Blue Titanite Slab - Crystal Cave", f"Blue Titanite Slab", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110399, f"CC: Soul of a Hero - Crystal Cave", f"Soul of a Hero", DSRLocationCategory.ITEM_LOT),
+],
+"Crystal Cave - Seath": [
     DSRLocationData(11110400, f"CC: Seath the Scaleless Defeated", f"Seath the Scaleless Defeated", DSRLocationCategory.BOSS),
 ],
 "Crystal Cave - After Seath": [
@@ -1236,6 +1266,9 @@ location_tables = {
     DSRLocationData(11110415, f"DR: Large Flame Ember", f"Large Flame Ember", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110416, f"DR: Soul of a Brave Warrior - Capra Outside Firesage", f"Soul of a Brave Warrior", DSRLocationCategory.ITEM_LOT),
 ],
+"Demon Ruins - Post Gold Fog": [
+    DSRLocationData(11110420, f"DR: Soul of a Brave Warrior - Chaos Covenant Door", f"Soul of a Brave Warrior", DSRLocationCategory.ITEM_LOT),
+],
 "Demon Ruins - Demon Firesage": [
     DSRLocationData(11110811, f"DR: Boss Fog Wall - Demon Firesage", f"Boss Fog Wall Key - Demon Firesage", DSRLocationCategory.BOSS_FOG_WALL),
     DSRLocationData(11110417, f"DR: Demon Firesage Defeated", f"Demon Firesage Defeated", DSRLocationCategory.BOSS),
@@ -1245,7 +1278,6 @@ location_tables = {
 "Demon Ruins - After Demon Firesage": [
     DSRLocationData(11110602, f"DR: Soul of a Brave Warrior - On Platform Below Roots to Centipede", f"Soul of a Brave Warrior", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110419, f"DR: Soul of a Brave Warrior - Ruins/Domain Elevator", f"Soul of a Brave Warrior", DSRLocationCategory.ITEM_LOT),
-    DSRLocationData(11110420, f"DR: Soul of a Brave Warrior - Chaos Covenant Door", f"Soul of a Brave Warrior", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110421, f"DR: Demon Ruins - Catacombs Bonfire", f"Bonfire Warp Unlock - Demon Ruins - Catacombs", DSRLocationCategory.BONFIRE),
 ],
 "Demon Ruins - Centipede Demon": [
@@ -1384,7 +1416,8 @@ location_tables = {
     DSRLocationData(11110697, f"TotG: Paladin Armor", f"Paladin Armor", DSRLocationCategory.ENEMY_DROP),
     DSRLocationData(11110698, f"TotG: Paladin Gauntlets", f"Paladin Gauntlets", DSRLocationCategory.ENEMY_DROP),
     DSRLocationData(11110699, f"TotG: Paladin Leggings", f"Paladin Leggings", DSRLocationCategory.ENEMY_DROP),
-],                    
+],
+"Tomb of the Giants - Gravelord Convenant": [],
 "Tomb of the Giants - Nito": [
     DSRLocationData(11110808, f"TotG: Boss Fog Wall - Nito", f"Boss Fog Wall Key - Nito", DSRLocationCategory.BOSS_FOG_WALL),
     DSRLocationData(11110494, f"TotG: Gravelord Nito Defeated", f"Gravelord Nito Defeated", DSRLocationCategory.BOSS),

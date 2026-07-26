@@ -212,6 +212,7 @@ class DSRWorld(World):
             "Undead Parish - Fog", 
             "Undead Parish", 
             "Undead Parish - Bell Gargoyles",
+            "Undead Parish - After Bell Gargoyles",
             "Firelink Shrine - After Undead Parish Elevator",
             "Northern Undead Asylum Second Visit",
             "Northern Undead Asylum Second Visit - F2 West Door",
@@ -223,7 +224,9 @@ class DSRWorld(World):
             "Lower Undead Burg - Capra Demon",
             "Lower Undead Burg - After Capra Demon",
             "Watchtower Basement",
-            "Depths", 
+            "Depths",
+            "Depths - Fog Gate Front",
+            "Depths - Fog Gate Rear",
             "Depths - After Sewer Chamber Key",
             "Depths - Gaping Dragon",
             "Depths - After Gaping Dragon",
@@ -253,11 +256,16 @@ class DSRWorld(World):
             "Sen's Fortress - Iron Golem",
             "Sen's Fortress - After Iron Golem",
             "Anor Londo",
+            "Anor Londo - Bottom Of First Spiral Elevator",
             "Anor Londo - After First Fog",
             "Anor Londo - Painting Room",
+            "Anor Londo - Main Building Outside",
+            "Anor Londo - Balcony",
             "Anor Londo - After Second Fog",
             "Anor Londo - Ornstein and Smough",
             "Anor Londo - After Ornstein and Smough",
+            "Anor Londo - Smough Elevator",
+            "Anor Londo - Ornstein Elevator",
             "Anor Londo - Gwynevere",
             "Anor Londo - Gwyndolin",
             "Anor Londo - After Gwyndolin",
@@ -276,15 +284,18 @@ class DSRWorld(World):
             "The Duke's Archives - After Archive Tower Cell Key",
             "The Duke's Archives - After Archive Prison Extra Key",
             "The Duke's Archives - Out of Cell",
-            "The Duke's Archives - After Archive Tower Giant Door Key", 
+            "The Duke's Archives - After Archive Tower Giant Door Key",
+            "The Duke's Archives - Small Pre Courtyard Room",
             "The Duke's Archives - Courtyard",
             "The Duke's Archives - Giant Cell", 
-            "Crystal Cave", 
+            "Crystal Cave",
+            "Crystal Cave - Seath",
             "Crystal Cave - After Seath", 
             "The Duke's Archives - First Arena after Seath's Death", 
             "Demon Ruins - Early",
             "Demon Ruins - Ceaseless Discharge",
-            "Demon Ruins", 
+            "Demon Ruins",
+            "Demon Ruins - Post Gold Fog",
             "Demon Ruins - Demon Firesage",
             "Demon Ruins - After Demon Firesage",
             "Demon Ruins - Centipede Demon",
@@ -299,6 +310,7 @@ class DSRWorld(World):
             "Tomb of the Giants", 
             "Tomb of the Giants - After White Fog", 
             "Tomb of the Giants - Behind Golden Fog Wall",
+            "Tomb of the Giants - Gravelord Convenant",
             "Tomb of the Giants - Nito",
             "Tomb of the Giants - After Nito",
             "Firelink Altar",
@@ -354,12 +366,13 @@ class DSRWorld(World):
         # print("DSR: created " + str(self.gc) + " real and "+ str(self.bc) + " fake locations")
 
         # Connect Regions
-        def create_connection(from_region: str, to_region: str, rule: Rule=True_()):
-            self.create_entrance(regions[from_region], regions[to_region], rule)
+        def create_connection(from_region: str, to_region: str, rule: Rule=True_(), name: str=""):
+            self.create_entrance(regions[from_region], regions[to_region], rule, name)
 
         for region in region_rules_table.keys():
             for entrance in region_rules_table[region]:
-                create_connection(entrance.source, region, rule=entrance.rule)
+                create_connection(entrance.source, region, rule=entrance.rule, name=entrance.name)
+
 
         # for skip in get_all_skips():
         #     self.create_entrance(regions[skip.starting_location], regions[skip.ending_location], rule=skip.get_rule(self), name=f"SKIP {skip.name}", force_creation=True)
@@ -619,8 +632,8 @@ class DSRWorld(World):
         # for debugging purposes, you may want to visualize the layout of your world. Uncomment the following code to
         # write a PlantUML diagram to the file "my_world.puml" that can help you see whether your regions and locations
         # are connected and placed as desired
-        # from Utils import visualize_regions
-        # visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
+        from Utils import visualize_regions
+        visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
  
         
     def fill_slot_data(self) -> Dict[str, object]:
