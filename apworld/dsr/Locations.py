@@ -168,9 +168,12 @@ class DSRLocation(Location):
             "Demon Ruins Shortcut",
             "Lost Izalith", 
             "Lost Izalith - Bed of Chaos", 
-            "The Catacombs", 
+            "The Catacombs",
             "The Catacombs - Door 1",
             "The Catacombs - After Door 1",
+            "The Catacombs - Fog Gate Front",
+            "The Catacombs - Fog Gate Rear",
+            "The Catacombs - Pinwheel Ledge",
             "The Catacombs - Pinwheel",
             "The Catacombs - After Pinwheel",
             "Tomb of the Giants", 
@@ -187,7 +190,7 @@ class DSRLocation(Location):
             "Oolacile Sanctuary", 
             "Royal Wood", 
             "Royal Wood - Artorias",
-            "Royal Wood - After Hawkeye Gough",
+            "Royal Wood - Kalameet",
             "Oolacile Township", 
             "Oolacile Township - Behind Light-Dispelled Walls",
             # "Oolacile Township - After Crest Key",
@@ -1362,11 +1365,14 @@ location_tables = {
     DSRLocationData(11110696, f"TC: Holy Trousers", f"Holy Trousers", DSRLocationCategory.ITEM_LOT),
     DSRLocationData(11110552, f"TC: Mace", f"Mace", DSRLocationCategory.ITEM_LOT),
 ],
+"The Catacombs - Fog Gate Front": [],
+"The Catacombs - Fog Gate Rear": [],
 "The Catacombs - Vamos": [
     # DSRLocationData(11110xxx, f"TC: Vamos", f"Vamos Access", DSRLocationCategory.EVENT),
     DSRLocationData(11111059, f"Vamos: Hammer of Vamos - Drop Added To Shop", f"Hammer of Vamos", DSRLocationCategory.SHOP_ITEM),
     DSRLocationData(11111060, f"Vamos: Royal Helm - Drop Added To Shop", f"Royal Helm", DSRLocationCategory.SHOP_ITEM),
 ],
+"The Catacombs - Pinwheel Ledge": [],
 "The Catacombs - Pinwheel": [
     DSRLocationData(11110807, f"TC: Boss Fog Wall - Pinwheel", f"Boss Fog Wall Key - Pinwheel", DSRLocationCategory.BOSS_FOG_WALL),
     DSRLocationData(11110470, f"TC: Pinwheel Defeated", f"Pinwheel Defeated", DSRLocationCategory.BOSS),
@@ -1504,7 +1510,7 @@ location_tables = {
     DSRLocationData(11111042, f"RW: Dark Silver Tracer - Lord's Blade Ciaran", f"Dark Silver Tracer", DSRLocationCategory.MISSABLE_DROP), # loot or trade, but she can leave
     DSRLocationData(11111043, f"RW: Gold Tracer - Lord's Blade Ciaran", f"Gold Tracer", DSRLocationCategory.MISSABLE_DROP), # loot or trade, but she can leave
 ],
-"Royal Wood - After Hawkeye Gough": [
+"Royal Wood - Kalameet": [
     DSRLocationData(11110747, f"RW: Black Dragon Kalameet Defeated", f"Black Dragon Kalameet Defeated", DSRLocationCategory.BOSS),
     DSRLocationData(11110748, f"RW: Calamity Ring", f"Calamity Ring", DSRLocationCategory.BOSS_DROP),
     DSRLocationData(11110749, f"RW: Gough's Great Arrow - Kalemeet's Arena", f"Gough's Great Arrow x3", DSRLocationCategory.ITEM_LOT),

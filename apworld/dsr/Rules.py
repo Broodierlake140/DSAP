@@ -280,7 +280,7 @@ region_rules_table: dict[str, list[DsrEntranceRule]] = {
   "Darkroot Basin": [
     DsrEntranceRule("Valley of the Drakes", True_()),
     DsrEntranceRule("Darkroot Garden - Before Fog", True_()),
-    DsrEntranceRule("Watchtower Basement", HasAny("Watchtower Basement Key", "Master Key")),
+    DsrEntranceRule("Watchtower Basement", HasAny("fhtower Basement Key", "Master Key")),
   ],
   "Darkroot Basin - Princess Dusk": [
     DsrEntranceRule("Darkroot Basin", Has("Princess Dusk Rescued")),
@@ -408,14 +408,14 @@ region_rules_table: dict[str, list[DsrEntranceRule]] = {
   ],
   "Painted World of Ariamis - After Fog": [
     DsrEntranceRule("Painted World of Ariamis", Has("Fog Wall Key - Painted World") | fogwall_sanity_off),
-    DsrEntranceRule("Painted World of Ariamis - Crossbreed Priscilla", CanReachRegion("Painted World of Ariamis") & Has("Boss Fog Wall Key - Crossbreed Priscilla") | bossfogwall_sanity_off),
+    DsrEntranceRule("Painted World of Ariamis - Crossbreed Priscilla", (CanReachRegion("Painted World of Ariamis")) & (Has("Boss Fog Wall Key - Crossbreed Priscilla") | bossfogwall_sanity_off)),
 
   ],
   "Painted World of Ariamis - After Annex Key": [
     DsrEntranceRule("Painted World of Ariamis - After Fog", Has("Annex Key")),
   ],
   "Painted World of Ariamis - Crossbreed Priscilla": [
-    DsrEntranceRule("Painted World of Ariamis - After Fog", CanReachRegion("Painted World of Ariamis") & Has("Boss Fog Wall Key - Crossbreed Priscilla") | bossfogwall_sanity_off),
+    DsrEntranceRule("Painted World of Ariamis - After Fog", (CanReachRegion("Painted World of Ariamis")) & (Has("Boss Fog Wall Key - Crossbreed Priscilla") | bossfogwall_sanity_off)),
   ],
   "Upper New Londo Ruins": [
     DsrEntranceRule("Firelink Shrine", True_()),
@@ -439,7 +439,7 @@ region_rules_table: dict[str, list[DsrEntranceRule]] = {
     DsrEntranceRule("New Londo Ruins Door to the Seal", True_()),
   ],
   "The Abyss": [
-    DsrEntranceRule("Lower New Londo Ruins", (Has("Covenant of Artorias") & Has("Boss Fog Wall Key - Four Kings") | bossfogwall_sanity_off)),
+    DsrEntranceRule("Lower New Londo Ruins", (Has("Covenant of Artorias")) & (Has("Boss Fog Wall Key - Four Kings") | bossfogwall_sanity_off)),
   ],
   "The Abyss - After Four Kings": [
     DsrEntranceRule("The Abyss", True_()), # Has("Four Kings Defeated")),
@@ -543,30 +543,76 @@ region_rules_table: dict[str, list[DsrEntranceRule]] = {
   ],
   "The Catacombs - After Door 1": [
     DsrEntranceRule("The Catacombs - Door 1", True_()),
+    DsrEntranceRule("The Catacombs - Pinwheel Ledge",(Has("Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_undead_merchant)], filtered_resolution=True)
+                                                      & Has("Andre of Astora Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre)], filtered_resolution=True)
+                                                      & HasAny("Andre of Astora Access", "Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre_or_undead_merchant)], filtered_resolution=True)
+                                                      & CanReachRegion("Anor Londo - After Ornstein and Smough", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_ornstein_and_smough)], filtered_resolution=True)) & (Has("Boss Fog Wall Key - Pinwheel") | bossfogwall_sanity_off) ),
+    DsrEntranceRule("The Catacombs - After Pinwheel", True_()),
+    DsrEntranceRule("The Catacombs - Fog Gate Front",         Has("Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_undead_merchant)], filtered_resolution=True)
+                    & Has("Andre of Astora Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre)], filtered_resolution=True)
+                    & HasAny("Andre of Astora Access", "Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre_or_undead_merchant)], filtered_resolution=True)
+                    & CanReachRegion("Anor Londo - After Ornstein and Smough", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_ornstein_and_smough)], filtered_resolution=True)
+                    ),
+    DsrEntranceRule("The Catacombs - Fog Gate Rear",         Has("Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_undead_merchant)], filtered_resolution=True)
+                    & Has("Andre of Astora Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre)], filtered_resolution=True)
+                    & HasAny("Andre of Astora Access", "Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre_or_undead_merchant)], filtered_resolution=True)
+                    & CanReachRegion("Anor Londo - After Ornstein and Smough", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_ornstein_and_smough)], filtered_resolution=True)
+                    ),
+  ],
+  "The Catacombs - Fog Gate Front": [
+    DsrEntranceRule("The Catacombs - After Door 1",         Has("Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_undead_merchant)], filtered_resolution=True)
+                    & Has("Andre of Astora Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre)], filtered_resolution=True)
+                    & HasAny("Andre of Astora Access", "Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre_or_undead_merchant)], filtered_resolution=True)
+                    & CanReachRegion("Anor Londo - After Ornstein and Smough", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_ornstein_and_smough)], filtered_resolution=True)
+                    ),
+    DsrEntranceRule("The Catacombs - Fog Gate Rear", Has("Fog Wall Key - Catacombs") | fogwall_sanity_off)
+  ],
+  "The Catacombs - Fog Gate Rear": [
+    DsrEntranceRule("The Catacombs - Fog Gate Front", Has("Fog Wall Key - Catacombs") | fogwall_sanity_off),
+    DsrEntranceRule("The Catacombs - After Door 1",         Has("Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_undead_merchant)], filtered_resolution=True)
+                    & Has("Andre of Astora Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre)], filtered_resolution=True)
+                    & HasAny("Andre of Astora Access", "Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre_or_undead_merchant)], filtered_resolution=True)
+                    & CanReachRegion("Anor Londo - After Ornstein and Smough", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_ornstein_and_smough)], filtered_resolution=True)
+                    ),
   ],
   "The Catacombs - Vamos": [
     DsrEntranceRule("The Catacombs - After Door 1", True_()),
   ],
+  "The Catacombs - Pinwheel Ledge": [
+    DsrEntranceRule("The Catacombs - After Door 1", (Has("Boss Fog Wall Key - Pinwheel") | bossfogwall_sanity_off) & (Has("Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_undead_merchant)], filtered_resolution=True)
+                                                                                                                      & Has("Andre of Astora Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre)], filtered_resolution=True)
+                                                                                                                      & HasAny("Andre of Astora Access", "Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre_or_undead_merchant)], filtered_resolution=True)
+                                                                                                                      & CanReachRegion("Anor Londo - After Ornstein and Smough", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_ornstein_and_smough)], filtered_resolution=True))),
+  ],
   "The Catacombs - Pinwheel": [
-    DsrEntranceRule("The Catacombs - After Door 1", Has("Boss Fog Wall Key - Pinwheel") | bossfogwall_sanity_off),
+    DsrEntranceRule("The Catacombs - Pinwheel Ledge", True_()),
   ],
   "The Catacombs - After Pinwheel": [
     DsrEntranceRule("The Catacombs - Pinwheel", True_()), # Has("Pinwheel Defeated")),
+    DsrEntranceRule("Tomb of the Giants", True_()),
   ],
   "Tomb of the Giants": [
     DsrEntranceRule("The Catacombs - After Pinwheel",
       Has("Skull Lantern", options=[OptionFilter(LogicToAccessTotG, LogicToAccessTotG.option_skull_lantern)], filtered_resolution=True) &
       Has("Sunlight Maggot", options=[OptionFilter(LogicToAccessTotG, LogicToAccessTotG.option_sunlight_maggot)], filtered_resolution=True)
-    )
+    ),
+    DsrEntranceRule("Tomb of the Giants - After White Fog", (Has("Fog Wall Key - Tomb of the Giants") | fogwall_sanity_off) &       (Has("Skull Lantern", options=[OptionFilter(LogicToAccessTotG, LogicToAccessTotG.option_skull_lantern)], filtered_resolution=True) &
+                    Has("Sunlight Maggot", options=[OptionFilter(LogicToAccessTotG, LogicToAccessTotG.option_sunlight_maggot)], filtered_resolution=True)) & (Has("Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_undead_merchant)], filtered_resolution=True)
+                                                                                                                                                              & Has("Andre of Astora Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre)], filtered_resolution=True)
+                                                                                                                                                              & HasAny("Andre of Astora Access", "Male Undead Merchant Access", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_andre_or_undead_merchant)], filtered_resolution=True)
+                                                                                                                                                              & CanReachRegion("Anor Londo - After Ornstein and Smough", options=[OptionFilter(LogicToAccessCatacombs, LogicToAccessCatacombs.option_ornstein_and_smough)], filtered_resolution=True))),
   ],
   "Tomb of the Giants - After White Fog": [
-    DsrEntranceRule("Tomb of the Giants", Has("Fog Wall Key - Tomb of the Giants") | fogwall_sanity_off),
+    DsrEntranceRule("Tomb of the Giants", (Has("Fog Wall Key - Tomb of the Giants") | fogwall_sanity_off) & (      Has("Skull Lantern", options=[OptionFilter(LogicToAccessTotG, LogicToAccessTotG.option_skull_lantern)], filtered_resolution=True) &
+                                                                                                                   Has("Sunlight Maggot", options=[OptionFilter(LogicToAccessTotG, LogicToAccessTotG.option_sunlight_maggot)], filtered_resolution=True))),
+    DsrEntranceRule("Tomb of the Giants - Behind Golden Fog Wall", Has("Lordvessel Placed")),
   ],
   "Tomb of the Giants - Behind Golden Fog Wall": [
     DsrEntranceRule("Tomb of the Giants - After White Fog", Has("Lordvessel Placed")),
+    DsrEntranceRule("Tomb of the Giants - Nito", Has("Boss Fog Wall Key - Nito") | bossfogwall_sanity_off),
   ],
   "Tomb of the Giants - Gravelord Convenant": [
-    
+    DsrEntranceRule("The Catacombs - After Door 1", True_()),
   ],
   "Tomb of the Giants - Nito": [
     DsrEntranceRule("Tomb of the Giants - Behind Golden Fog Wall", Has("Boss Fog Wall Key - Nito") | bossfogwall_sanity_off),
@@ -585,39 +631,47 @@ region_rules_table: dict[str, list[DsrEntranceRule]] = {
   ],
   "Kiln of the First Flame": [
     DsrEntranceRule("Firelink Altar", HasAll("Lord Soul (Bed of Chaos)", "Lord Soul (Nito)", "Bequeathed Lord Soul Shard (Four Kings)", "Bequeathed Lord Soul Shard (Seath)", "Lordvessel")),
+    DsrEntranceRule("Kiln of the First Flame - Gwyn", Has("Boss Fog Wall Key - Gwyn") | bossfogwall_sanity_off),
   ],
   "Kiln of the First Flame - Gwyn": [
     DsrEntranceRule("Kiln of the First Flame", Has("Boss Fog Wall Key - Gwyn") | bossfogwall_sanity_off),
   ],
   "Sanctuary Garden": [
     DsrEntranceRule("Darkroot Basin", Has("Broken Pendant")),
+    DsrEntranceRule("Sanctuary Garden - Sanctuary Guardian", Has("Boss Fog Wall Key - Sanctuary Guardian") | bossfogwall_sanity_off),
   ],
   "Sanctuary Garden - Sanctuary Guardian": [
     DsrEntranceRule("Sanctuary Garden", Has("Boss Fog Wall Key - Sanctuary Guardian") | bossfogwall_sanity_off),
+    DsrEntranceRule("Oolacile Sanctuary", Has("Boss Fog Wall Key - Sanctuary Guardian") | bossfogwall_sanity_off),
   ],
   "Oolacile Sanctuary": [
-    DsrEntranceRule("Sanctuary Garden - Sanctuary Guardian", True_()), # Has("Sanctuary Guardian Defeated")),
+    DsrEntranceRule("Sanctuary Garden - Sanctuary Guardian", Has("Boss Fog Wall Key - Sanctuary Guardian") | bossfogwall_sanity_off),
+    DsrEntranceRule("Royal Wood", True_()),
   ],
   "Oolacile Sanctuary - Elizabeth": [
     DsrEntranceRule("Oolacile Sanctuary", True_()),
   ],
   "Royal Wood": [
     DsrEntranceRule("Oolacile Sanctuary", True_()),
+    DsrEntranceRule("Royal Wood - Artorias", Has("Boss Fog Wall Key - Artorias") | bossfogwall_sanity_off),
+    DsrEntranceRule("Royal Wood - Kalameet", True_()),
   ],
   "Royal Wood - Marvelous Chester": [
     DsrEntranceRule("Royal Wood", True_()),
   ],
   "Royal Wood - Artorias": [
     DsrEntranceRule("Royal Wood", Has("Boss Fog Wall Key - Artorias") | bossfogwall_sanity_off),
+    DsrEntranceRule("Oolacile Township", Has("Boss Fog Wall Key - Artorias") | bossfogwall_sanity_off),
   ],
   "Royal Wood - Hawkeye Gough": [
     DsrEntranceRule("Oolacile Township", Has("Crest Key")),
   ],
-  "Royal Wood - After Hawkeye Gough": [
-    DsrEntranceRule("Royal Wood - Hawkeye Gough", True_()), # depends on being able to reach kalameet arena, technically, but until fog rando that will always be in logic
+  "Royal Wood - Kalameet": [
+    DsrEntranceRule("Royal Wood", CanReachRegion("Royal Wood - Hawkeye Gough")), # depends on being able to reach kalameet arena, technically, but until fog rando that will always be in logic
+    #adding changes for future er so changed this to need Hawkeye gough access and be accesible from Royal Wood
   ],
   "Oolacile Township": [
-    DsrEntranceRule("Royal Wood - Artorias", True_()), # Has("Artorias the Abysswalker Defeated")),
+    DsrEntranceRule("Royal Wood - Artorias", Has("Boss Fog Wall Key - Artorias") | bossfogwall_sanity_off),
     DsrEntranceRule("Chasm of the Abyss", True_()),
   ],
   "Oolacile Township - Behind Light-Dispelled Walls": [
@@ -625,9 +679,10 @@ region_rules_table: dict[str, list[DsrEntranceRule]] = {
   ],
   "Chasm of the Abyss": [
     DsrEntranceRule("Oolacile Township", True_()),
+    DsrEntranceRule("Chasm of the Abyss - Manus", Has("Boss Fog Wall Key - Manus") | bossfogwall_sanity_off),
   ],
   "Chasm of the Abyss - Manus": [
-    DsrEntranceRule("Chasm of the Abyss", Has("Boss Fog Wall Key - Manus") | bossfogwall_sanity_off),
+      DsrEntranceRule("Chasm of the Abyss", Has("Boss Fog Wall Key - Manus") | bossfogwall_sanity_off),
   ],
   "2 Merchants - Bottomless Box": [
     DsrEntranceRule("Upper Undead Burg - Male Undead Merchant", True_()),
